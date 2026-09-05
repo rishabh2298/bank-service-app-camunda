@@ -1,115 +1,507 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	
-	<groupId>com.bank</groupId>
-	<artifactId>BankServiceApp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>BankServiceApp</name>
-	<description/>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
-	
-	<!-- PUT PROPERTIES HERE -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <!-- ============================================================
+         Spring Boot Parent
+         ============================================================
+
+         Provides:
+         - Default Maven configuration for Spring Boot
+         - Dependency version management for Spring Boot libraries
+         - Plugin management
+         - Java compilation defaults
+
+         Example:
+         spring-boot-starter-web gets its compatible version
+         from the Spring Boot parent.
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.0</version>
+        <relativePath/>
+    </parent>
+
+
+    <!-- ============================================================
+         Project Information
+         ============================================================ -->
+
+    <groupId>com.bank</groupId>
+    <artifactId>BankServiceApp</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>BankServiceApp</name>
+    <description>Banking Service application using Spring Boot and Camunda 7</description>
+
+
+    <!-- ============================================================
+         Project Properties
+         ============================================================ -->
+
     <properties>
-        <java.version>17</java.version>
+
+        <!-- Project source encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Java version used to compile the application -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+
+        <!-- Camunda Platform version -->
         <camunda.version>7.24.0</camunda.version>
+
     </properties>
-	
-	<dependencies>
 
-	    <dependency>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter-web</artifactId>
-	    </dependency>
-	
-	    <dependency>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter-test</artifactId>
-	        <scope>test</scope>
-	    </dependency>
-	    
-	    <!-- Camunda Spring Boot Starter -->
-		<dependency>
-		    <groupId>org.camunda.bpm.springboot</groupId>
-		    <artifactId>camunda-bpm-spring-boot-starter</artifactId>
-		</dependency>
-		
-		<!-- Camunda REST API -->
-		<dependency>
-		    <groupId>org.camunda.bpm.springboot</groupId>
-		    <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-		</dependency>
-		
-		<!-- Camunda Webapp: Cockpit, Tasklist, Admin -->
-		<dependency>
-		    <groupId>org.camunda.bpm.springboot</groupId>
-		    <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-		</dependency>
-		
-		<!-- Camunda Spin: JSON/XML support -->
-		<dependency>
-		    <groupId>org.camunda.spin</groupId>
-		    <artifactId>camunda-spin-dataformat-all</artifactId>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.camunda.bpm</groupId>
-		    <artifactId>camunda-engine-plugin-spin</artifactId>
-		</dependency>
-		
-		<!-- Spring JDBC -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		
-		<!-- H2 -->
-		<dependency>
-		    <groupId>com.h2database</groupId>
-		    <artifactId>h2</artifactId>
-		    <scope>runtime</scope>
-		</dependency>
-		
-		<!-- Camunda testing -->
-		<dependency>
-		    <groupId>org.camunda.bpm.springboot</groupId>
-			<artifactId>camunda-bpm-spring-boot-starter-test</artifactId>
-		    <scope>test</scope>
-		</dependency>
-		
-		<!-- Spring Boot testing -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-test</artifactId>
-		    <scope>test</scope>
-		</dependency>
-		
-	</dependencies>
 
-	<!-- PUT DEPENDENCY MANAGEMENT HERE -->
+    <!-- ============================================================
+         DEPENDENCIES
+         ============================================================ -->
+
+    <dependencies>
+
+
+        <!-- ========================================================
+             SPRING BOOT
+             ======================================================== -->
+
+        <!--
+            Spring MVC + Embedded Tomcat + REST API support.
+
+            Used for creating normal Banking Service APIs.
+
+            Example:
+                @RestController
+                @GetMapping("/accounts")
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+
+        <!-- ========================================================
+             CAMUNDA ENGINE
+             ======================================================== -->
+
+        <!--
+            Embeds the Camunda 7 Process Engine inside the
+            Spring Boot application.
+
+            This is the main dependency that allows our application
+            to execute BPMN processes.
+
+            Example:
+
+                @Autowired
+                private RuntimeService runtimeService;
+
+                runtimeService.startProcessInstanceByKey(
+                    "simpleProcess"
+                );
+
+            Architecture:
+
+                Spring Boot
+                    |
+                    + Camunda Process Engine
+                            |
+                            + BPMN
+                            + Jobs
+                            + Process Instances
+                            + Tasks
+        -->
+        <dependency>
+            <groupId>org.camunda.bpm.springboot</groupId>
+            <artifactId>camunda-bpm-spring-boot-starter</artifactId>
+        </dependency>
+
+
+        <!--
+            Provides Camunda's REST API.
+
+            Used when we want to interact with the Camunda engine
+            through HTTP instead of directly using Java APIs.
+
+            Example:
+
+                GET /engine-rest/process-definition
+
+            or:
+
+                POST /engine-rest/process-definition/key/simpleProcess/start
+        -->
+        <dependency>
+            <groupId>org.camunda.bpm.springboot</groupId>
+            <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+        </dependency>
+
+
+        <!--
+            Provides Camunda's web applications:
+
+            - Tasklist
+            - Cockpit
+            - Admin
+
+            This allows us to access the Camunda UI through the
+            Spring Boot application.
+
+            Example:
+
+                http://localhost:8080/camunda/app/tasklist/
+
+            Tasklist is where human User Tasks such as:
+
+                "Approve Request"
+
+            can be viewed and completed.
+        -->
+        <dependency>
+            <groupId>org.camunda.bpm.springboot</groupId>
+            <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+        </dependency>
+
+
+        <!-- ========================================================
+             CAMUNDA SPIN
+             ======================================================== -->
+
+        <!--
+            Camunda Spin Core.
+
+            Provides the core Spin API used for working with
+            structured data such as JSON and XML.
+
+            Example:
+
+                SpinJsonNode json = JSON(
+                    "{\"accountId\": \"ACC123\", \"amount\": 5000}"
+                );
+        -->
+        <dependency>
+            <groupId>org.camunda.spin</groupId>
+            <artifactId>camunda-spin-core</artifactId>
+        </dependency>
+
+
+        <!--
+            Spin JSON support using Jackson.
+
+            Used when we specifically want to work with JSON
+            using Jackson as the JSON implementation.
+
+            Example:
+
+                SpinJsonNode json = JSON(
+                    "{\"name\":\"Rishabh\",\"balance\":10000}"
+                );
+
+                String name = json.prop("name").stringValue();
+        -->
+        <dependency>
+            <groupId>org.camunda.spin</groupId>
+            <artifactId>camunda-spin-dataformat-json-jackson</artifactId>
+        </dependency>
+
+
+        <!--
+            Registers the Camunda Spin plugin with the
+            Camunda Process Engine.
+
+            This allows Spin to be used by the engine for
+            handling JSON/XML process variables and expressions.
+
+            Example BPMN variable:
+
+                execution.setVariable(
+                    "customer",
+                    SpinValues.jsonValue(json)
+                );
+        -->
+        <dependency>
+            <groupId>org.camunda.bpm</groupId>
+            <artifactId>camunda-engine-plugin-spin</artifactId>
+        </dependency>
+
+
+        <!--
+            OPTIONAL: All Camunda Spin data formats.
+
+            Currently commented out because we only explicitly need
+            JSON/Jackson support.
+
+            This dependency provides multiple Spin data formats
+            together, such as:
+
+                - JSON
+                - XML
+                - Other supported Spin formats
+
+            Use this when the application needs several Spin
+            data formats instead of only JSON.
+
+            Example:
+
+                JSON:
+                    SpinJsonNode json = JSON("...");
+
+                XML:
+                    SpinXmlElement xml = XML("...");
+
+            Keeping this commented means it is NOT currently
+            included in the application.
+        -->
+        <!--
+        <dependency>
+            <groupId>org.camunda.spin</groupId>
+            <artifactId>camunda-spin-dataformat-all</artifactId>
+        </dependency>
+        -->
+
+
+        <!-- ========================================================
+             DATABASE
+             ======================================================== -->
+
+        <!--
+            Spring JDBC support.
+
+            Provides JdbcTemplate and related JDBC infrastructure.
+
+            Used for application-specific banking database operations.
+
+            Example:
+
+                jdbcTemplate.query(
+                    "SELECT * FROM account",
+                    ...
+                );
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+
+        <!--
+            H2 in-memory database.
+
+            Used as the database for local development/testing.
+
+            Camunda also needs a database to store:
+
+                - Process definitions
+                - Process instances
+                - Tasks
+                - Jobs
+                - History
+                - Users/Groups
+
+            scope=runtime means H2 is needed when the application
+            runs, but it is not required to compile application code.
+        -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+
+        <!-- ========================================================
+             JAVASCRIPT / EXPRESSION SUPPORT
+             ======================================================== -->
+
+        <!--
+            Nashorn JavaScript Engine.
+
+            Java removed Nashorn from the JDK after Java 14.
+            This dependency provides Nashorn separately.
+
+            It can be useful when Camunda processes use
+            JavaScript-based expressions/scripts.
+
+            Example BPMN Script:
+
+                <bpmn:scriptTask scriptFormat="javascript">
+                    execution.setVariable(
+                        "approved",
+                        true
+                    );
+                </bpmn:scriptTask>
+
+            Version explicitly requested: 15.4
+        -->
+        <dependency>
+            <groupId>org.openjdk.nashorn</groupId>
+            <artifactId>nashorn-core</artifactId>
+            <version>15.4</version>
+        </dependency>
+
+
+        <!-- ========================================================
+             LOMBOK
+             ======================================================== -->
+
+        <!--
+            Lombok reduces Java boilerplate code.
+
+            Common annotations:
+
+                @Getter
+                @Setter
+                @Data
+                @Builder
+                @NoArgsConstructor
+                @AllArgsConstructor
+
+            Example:
+
+                @Data
+                public class Account {
+                    private Long id;
+                    private String accountNumber;
+                    private BigDecimal balance;
+                }
+
+            Without Lombok we would need to manually write
+            getters, setters, equals(), hashCode(), toString(), etc.
+        -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
+        <!-- ========================================================
+             TESTING
+             ======================================================== -->
+
+        <!--
+            Spring Boot testing support.
+
+            Provides utilities for testing Spring components,
+            controllers, services, repositories, etc.
+
+            Example:
+
+                @SpringBootTest
+                class BankServiceTest {
+                }
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!--
+            Camunda Spring Boot testing support.
+
+            Provides testing utilities for Camunda integrated
+            with Spring Boot.
+
+            Useful for testing:
+
+                - BPMN processes
+                - Process instances
+                - Delegates
+                - Camunda configuration
+                - Spring + Camunda integration
+        -->
+        <dependency>
+            <groupId>org.camunda.bpm.springboot</groupId>
+            <artifactId>camunda-bpm-spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!--
+            Camunda JUnit 5 testing support.
+
+            Used for writing unit/integration tests specifically
+            for Camunda BPMN processes.
+
+            Example:
+
+                @ExtendWith(ProcessEngineExtension.class)
+                class ProcessTest {
+
+                    @Test
+                    void shouldStartProcess() {
+                        runtimeService
+                            .startProcessInstanceByKey(
+                                "simpleProcess"
+                            );
+                    }
+                }
+        -->
+        <dependency>
+            <groupId>org.camunda.bpm</groupId>
+            <artifactId>camunda-bpm-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!--
+            AssertJ provides fluent assertions for tests.
+
+            Example:
+
+                assertThat(processInstance)
+                    .isNotNull();
+
+                assertThat(task.getName())
+                    .isEqualTo("Approve Request");
+
+            Version explicitly requested: 3.13.2
+        -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.13.2</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+
+    <!-- ============================================================
+         DEPENDENCY MANAGEMENT
+         ============================================================ -->
+
     <dependencyManagement>
         <dependencies>
+
+            <!--
+                Camunda BOM (Bill of Materials).
+
+                Manages compatible versions of Camunda modules.
+
+                Because of this BOM, we don't need to write:
+
+                    <version>7.24.0</version>
+
+                separately for every Camunda dependency.
+
+                Example:
+
+                    camunda-bpm-spring-boot-starter
+                    camunda-bpm-spring-boot-starter-rest
+                    camunda-spin-core
+                    camunda-bpm-junit5
+
+                all use versions compatible with Camunda 7.24.0.
+            -->
             <dependency>
                 <groupId>org.camunda.bpm</groupId>
                 <artifactId>camunda-bom</artifactId>
@@ -117,16 +509,41 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+
+    <!-- ============================================================
+         BUILD
+         ============================================================ -->
+
+    <build>
+        <plugins>
+
+            <!--
+                Spring Boot Maven Plugin.
+
+                Used to:
+
+                - Run the Spring Boot application
+                - Package the application as an executable JAR
+
+                Example:
+
+                    mvn spring-boot:run
+
+                or:
+
+                    mvn clean package
+                    java -jar target/BankServiceApp-0.0.1-SNAPSHOT.jar
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
