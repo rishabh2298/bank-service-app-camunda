@@ -1,10 +1,23 @@
 spring:
   datasource:
-#    url: jdbc:h2:file:./camunda-h2-database
-     url: jdbc:h2:mem:testdb
+    url: jdbc:h2:file:./camunda-h2-database
+#     url: jdbc:h2:mem:testdb
 
 camunda:
   bpm:
     admin-user:
       id: demo
       password: demo 
+
+#			 default formate for serialization, req. for working with Spin, JSON varialbe, FEEL access.
+    default-serialization-format: application/json
+
+#		set TTL for P1D (ISO format) - Perior of 1 Day
+    generic-properties:
+      properties:
+        history-time-to-live: P1D
+
+logging:
+  level:
+    org.camunda.bpmn.engine: info
+    org.camunda.bpm: info
