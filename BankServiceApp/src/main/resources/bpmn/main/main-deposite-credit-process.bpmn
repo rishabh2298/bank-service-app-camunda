@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://camunda.org/examples" exporter="Camunda Modeler" exporterVersion="5.50.1">
   <bpmn:process id="simpleProcess" name="Simple Process" isExecutable="true" camunda:historyTimeToLive="30">
-    <bpmn:startEvent id="startEvent" name="Start">
+    <bpmn:startEvent id="startEvent" name="MainDepositCreditEvent">
       <bpmn:outgoing>Flow_1</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:endEvent id="endEvent" name="End">
@@ -89,7 +89,7 @@
       <bpmndi:BPMNShape id="StartEvent_di" bpmnElement="startEvent">
         <dc:Bounds x="150" y="410" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="156" y="446" width="24" height="14" />
+          <dc:Bounds x="124" y="446" width="88" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1miougu_di" bpmnElement="Activity_1m4ydbu">
