@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://camunda.org/examples" exporter="Camunda Modeler" exporterVersion="5.50.1">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="Definitions_1" targetNamespace="http://camunda.org/examples" exporter="Camunda Modeler" exporterVersion="5.50.1">
   <bpmn:process id="simpleProcess" name="Simple Process" isExecutable="true" camunda:historyTimeToLive="30">
     <bpmn:startEvent id="startEvent" name="MainDepositCreditEvent">
       <bpmn:outgoing>Flow_1</bpmn:outgoing>
@@ -9,7 +9,7 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1" sourceRef="startEvent" targetRef="GoingToBankId" />
     <bpmn:sequenceFlow id="Flow_1lr6j1q" sourceRef="GoingToBankId" targetRef="Gateway_09bz1sj" />
-    <bpmn:userTask id="GoingToBankId" name="Going to the Bank" camunda:formKey="camunda-forms:/form/way-toget-to-the-bank.form">
+    <bpmn:userTask id="GoingToBankId" name="Going to the Bank" camunda:formKey="camunda-forms:/form/way-to-get-to-the-bank.form">
       <bpmn:incoming>Flow_1</bpmn:incoming>
       <bpmn:outgoing>Flow_1lr6j1q</bpmn:outgoing>
     </bpmn:userTask>
@@ -121,7 +121,7 @@
           <dc:Bounds x="2550" y="446" width="20" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1miougu_di" bpmnElement="GoingToBankId">
+      <bpmndi:BPMNShape id="Activity_1miougu_di" bpmnElement="GoingToBankId" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
         <dc:Bounds x="360" y="388" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_09bz1sj_di" bpmnElement="Gateway_09bz1sj" isMarkerVisible="true">
@@ -130,7 +130,7 @@
           <dc:Bounds x="618" y="460" width="65" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_08cxrup_di" bpmnElement="PayForTheTaxi">
+      <bpmndi:BPMNShape id="Activity_08cxrup_di" bpmnElement="PayForTheTaxi" bioc:stroke="#6b3c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#6b3c00">
         <dc:Bounds x="810" y="190" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0tece43_di" bpmnElement="Gateway_0tece43" isMarkerVisible="true">
@@ -139,19 +139,19 @@
           <dc:Bounds x="1355" y="421" width="89" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0o87d50_di" bpmnElement="CreditObtainingProcessId">
+      <bpmndi:BPMNShape id="Activity_0o87d50_di" bpmnElement="CreditObtainingProcessId" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
         <dc:Bounds x="1590" y="590" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0d53d05_di" bpmnElement="DepositeOpeningProcessId">
+      <bpmndi:BPMNShape id="Activity_0d53d05_di" bpmnElement="DepositeOpeningProcessId" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
         <dc:Bounds x="1590" y="190" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0y93unp_di" bpmnElement="Gateway_0y93unp" isMarkerVisible="true">
         <dc:Bounds x="1895" y="403" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1t6fbd6_di" bpmnElement="ActivityRoadToHomeId">
+      <bpmndi:BPMNShape id="Activity_1t6fbd6_di" bpmnElement="ActivityRoadToHomeId" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
         <dc:Bounds x="2210" y="388" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_05z2bya_di" bpmnElement="GetTicketInQueueMachineId">
+      <bpmndi:BPMNShape id="Activity_05z2bya_di" bpmnElement="GetTicketInQueueMachineId" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
         <dc:Bounds x="1020" y="388" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_12sn38b_di" bpmnElement="TextAnnotation_12sn38b">
@@ -215,7 +215,7 @@
         <di:waypoint x="1320" y="230" />
         <di:waypoint x="1590" y="230" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1299" y="313.5" width="74" height="14" />
+          <dc:Bounds x="1332" y="314" width="74" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0mfpbnt_di" bpmnElement="Flow_0mfpbnt">
@@ -223,7 +223,7 @@
         <di:waypoint x="1320" y="630" />
         <di:waypoint x="1590" y="630" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1305" y="538.5" width="62" height="14" />
+          <dc:Bounds x="1332" y="539" width="62" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0wnqiri_di" bpmnElement="Flow_0wnqiri">
